@@ -2,7 +2,9 @@ class CreateEvents < ActiveRecord::Migration[5.0]
   def change
     create_table :events do |t|
 
-      t.references :requests, foreign_key:true
+      t.attachment :file
+      t.string :fileName
+
       #date, location
       t.string :canadian_performance
       t.string :date_of_program

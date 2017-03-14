@@ -18,15 +18,17 @@ ActiveRecord::Schema.define(version: 20170314201957) do
   create_table "composers", force: :cascade do |t|
     t.string   "name"
     t.integer  "event_id"
-    t.integer  "song_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["event_id"], name: "index_composers_on_event_id", using: :btree
-    t.index ["song_id"], name: "index_composers_on_song_id", using: :btree
   end
 
   create_table "events", force: :cascade do |t|
-    t.integer  "requests_id"
+    t.string   "file_file_name"
+    t.string   "file_content_type"
+    t.integer  "file_file_size"
+    t.datetime "file_updated_at"
+    t.string   "fileName"
     t.string   "canadian_performance"
     t.string   "date_of_program"
     t.string   "street1"
@@ -53,17 +55,6 @@ ActiveRecord::Schema.define(version: 20170314201957) do
     t.string   "promoter_telephone"
     t.datetime "created_at",           null: false
     t.datetime "updated_at",           null: false
-    t.index ["requests_id"], name: "index_events_on_requests_id", using: :btree
-  end
-
-  create_table "requests", force: :cascade do |t|
-    t.string   "file_file_name"
-    t.string   "file_content_type"
-    t.integer  "file_file_size"
-    t.datetime "file_updated_at"
-    t.string   "fileName"
-    t.datetime "created_at",        null: false
-    t.datetime "updated_at",        null: false
   end
 
   create_table "songs", force: :cascade do |t|
@@ -75,7 +66,5 @@ ActiveRecord::Schema.define(version: 20170314201957) do
   end
 
   add_foreign_key "composers", "events"
-  add_foreign_key "composers", "songs"
-  add_foreign_key "events", "requests", column: "requests_id"
   add_foreign_key "songs", "events"
 end

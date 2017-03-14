@@ -1,0 +1,45 @@
+Test
+
+
+.ui.container
+  .ui.header Create Event
+  = form_for :event, url: '/events' , html:{class: 'ui form'} do  |f|
+    = f.text_field :marie_no
+    = f.submit class: 'ui button'
+
+
+.ui.container
+  .ui.header Create Event
+  = form_for :event, url: 'events/1/venue' , html:{class: 'ui form'} do  |f|
+    .field
+      = f.text_field :type_of_program
+    = f.text_field :artist_name
+    = f.text_field :proof_type
+    = f.text_field :venue
+    = f.text_field :venuetype
+    = f.text_field :venuecapacity
+    = f.text_field :venue_phone
+    = f.text_field :venue_website
+    = f.text_field :performance_time
+    = f.submit class: 'ui button'
+
+.ui.container
+  .ui.header Create Event
+  = form_for :event, url: 'events/1/promoter' , html:{class: 'ui form'} do  |f|
+    = f.text_field :promoter
+    = f.text_field :promoter_street1
+    = f.text_field :promoter_city
+    = f.text_field :promoter_province
+    = f.text_field :promoter_postal_code
+    = f.text_field :promoter_country
+    = f.text_field :promoter_telephone
+
+    = f.submit class: 'ui button'
+
+.ui.container
+  .ui.header Create Event
+  = form_for :event, url: 'events/1/setlist' , html:{class: 'ui form'} do  |f|
+    = f.file_field :file
+    = f.text_field :fileName
+
+    = f.submit class: 'ui button'
