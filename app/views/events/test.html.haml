@@ -9,10 +9,9 @@ Test
 
 
 .ui.container
-  .ui.header Create Event
+  .ui.header Create Event Venue
   = form_for :event, url: 'events/1/venue' , html:{class: 'ui form'} do  |f|
-    .field
-      = f.text_field :type_of_program
+    = f.text_field :type_of_program
     = f.text_field :artist_name
     = f.text_field :proof_type
     = f.text_field :venue
@@ -24,7 +23,7 @@ Test
     = f.submit class: 'ui button'
 
 .ui.container
-  .ui.header Create Event
+  .ui.header Create Event Promoter
   = form_for :event, url: 'events/1/promoter' , html:{class: 'ui form'} do  |f|
     = f.text_field :promoter
     = f.text_field :promoter_street1
@@ -37,7 +36,7 @@ Test
     = f.submit class: 'ui button'
 
 .ui.container
-  .ui.header Create Event
+  .ui.header Create Event Setlist
   = form_for :event, url: 'events/1/setlist' , html:{class: 'ui form'} do  |f|
     = f.file_field :file
     = f.text_field :fileName

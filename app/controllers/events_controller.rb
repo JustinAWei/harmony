@@ -4,7 +4,7 @@ class EventsController < ApplicationController
 
   def create
     event = Event.new
-    event.marie_no = params[:marie_no]
+    event.update(marie_no: params[:event][:marie_no])
     event.save
 
     render json: {
@@ -15,37 +15,47 @@ class EventsController < ApplicationController
 
   def venue
     event = Event.find(params[:id])
-    event.composers.create(params[:artist_name])
 
-    event.type_of_program = params[:type_of_program]
-    event.proof_type = params[:proof_type]
-    event.venue = params[:venueType]
-    event.venuecapacity = params[:venuecapacity]
-    event.venue_phone = params[:venue_phone]
-    event.venue_website = params[:venue_website]
+    #composer = event.composers.new
+    #composer.update(name: params[:event][:artist_name])
 
-    event.performance_time = params[:performance_time]
+    event.update(type_of_program: params[:event][:type_of_program])
+    event.update(proof_type: params[:event][:proof_type])
+    event.update(venue: params[:event][:venue])
+    event.update(venuetype: params[:event][:venuetype])
+    event.update(venuecapacity: params[:event][:venuecapacity])
+    event.update(venue_phone: params[:event][:venue_phone])
+    event.update(venue_website: params[:event][:venue_website])
+
+    event.update(performance_time: params[:event][:performance_time])
+
+    #puts composer.errors.full_messages
+    puts event.errors.full_messages
 
     #LOCATION SHIT
-
-    event.save
+    redirect_to root_path
   end
 
   def promoter
     event = Event.find(params[:id])
-    event.promoter = params[:promoter]
-    event.promoter_street1 = params[:promoter_street1]
-    event.promoter_city = params[:promoter_city]
-    event.promoter_province = params[:promoter_province]
-    event.promoter_postal_code = params[:promoter_postal_code]
-    event.promoter_country = params[:promoter_country]
-    event.promoter_telephone = params[:promoter_telephone]
 
-    event.save
+    event.update(promoter: params[:event][:promoter])
+    event.update(promoter_street1: params[:event][:promoter_street1])
+    event.update(promoter_city: params[:event][:promoter_city])
+    event.update(promoter_province: params[:event][:promoter_province])
+    event.update(promoter_postal_code: params[:event][:promoter_postal_code])
+    event.update(promoter_country: params[:event][:promoter_country])
+    event.update(promoter_telephone: params[:event][:promoter_telephone])
+
+    redirect_to root_path
   end
 
 
   def setlist
+    event = Event.find(params[:id])
+    event.update(file: params[:event][:file])
+    event.update(fileName: params[:event][:fileName])
+    redirect_to root_path
   end
 
 end
