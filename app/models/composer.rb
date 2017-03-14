@@ -1,3 +1,3 @@
 class Composer < ApplicationRecord
-  belongs_to :events
+  belongs_to :event
 end
