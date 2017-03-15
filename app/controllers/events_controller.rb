@@ -20,7 +20,7 @@ class EventsController < ApplicationController
     num_songs = 0
     c = "{ \"ORIGINAL_TITLE\":\"#{event.songs.first.title}\",\"COMPOSER\":\"#{event.songs.first.artist}\" }"
     event.songs.each do |s|
-      if num_songs == 1
+      if num_songs == 0
         num_composers += 1
         next
       end
