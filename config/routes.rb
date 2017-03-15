@@ -4,8 +4,9 @@ Rails.application.routes.draw do
   #make event
   root to: 'events#test'
 
+  get '/dashboard' => 'events#dashboard'
+
   post '/events' => 'events#create'
-  
 
   #venue info
   post '/events/:id/venue' => 'events#venue'
