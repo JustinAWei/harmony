@@ -4,9 +4,8 @@ Rails.application.routes.draw do
   #make event
   root to: 'events#test'
 
-  #marie_id
   post '/events' => 'events#create'
-
+  
 
   #venue info
   post '/events/:id/venue' => 'events#venue'
@@ -21,8 +20,9 @@ Rails.application.routes.draw do
   #attach composers
   #attach songs and their composers
 
-  post '/events/:id/composer' => 'composers#create'
+  post '/events/:id/composers' => 'events#composer'
 
-  post '/events/:id/songs' => 'songs#create'
+  post '/events/:id/songs' => 'events#song'
 
+  post '/events/:id/location' => 'events#geomap'
 end

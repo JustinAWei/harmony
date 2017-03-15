@@ -7,12 +7,29 @@ Test
     = f.text_field :marie_no
     = f.submit class: 'ui button'
 
+.ui.container
+  .ui.header Create Composer
+  = form_for :event, url: '/events/1/composers' , html:{class: 'ui form'} do  |f|
+    = f.text_field :artist_name
+    = f.submit class: 'ui button'
+
+.ui.container
+  .ui.header Create Song
+  = form_for :event, url: '/events/1/songs' , html:{class: 'ui form'} do  |f|
+    = f.text_field :title
+    = f.text_field :artist
+    = f.submit class: 'ui button'
+
+.ui.container
+  .ui.header Create Location
+  = form_for :event, url: '/events/1/location' , html:{class: 'ui form'} do  |f|
+    = f.text_field :location
+    = f.submit class: 'ui button'
 
 .ui.container
   .ui.header Create Event Venue
   = form_for :event, url: 'events/1/venue' , html:{class: 'ui form'} do  |f|
     = f.text_field :type_of_program
-    = f.text_field :artist_name
     = f.text_field :proof_type
     = f.text_field :venue
     = f.text_field :venuetype

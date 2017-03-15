@@ -13,11 +13,16 @@ class EventsController < ApplicationController
 
   end
 
+  def composer
+    event = Event.find(params[:id])
+    composer = event.composers.new
+    composer.update(name: params[:event][:artist_name])
+    composer.save
+    redirect_to root_path
+  end
+
   def venue
     event = Event.find(params[:id])
-
-    #composer = event.composers.new
-    #composer.update(name: params[:event][:artist_name])
 
     event.update(type_of_program: params[:event][:type_of_program])
     event.update(proof_type: params[:event][:proof_type])
@@ -26,13 +31,36 @@ class EventsController < ApplicationController
     event.update(venuecapacity: params[:event][:venuecapacity])
     event.update(venue_phone: params[:event][:venue_phone])
     event.update(venue_website: params[:event][:venue_website])
+    event.save
+
+    redirect_to root_path
+  end
+
+  def geomap
+    event = Event.find(params[:id])
+    address = Geokit::Geocoders::GoogleGeocoder.reverse_geocode(params[:event][:location]).full_address.split(',')
+
+    event.update(street1: address[0])
+    event.update(city: address[1])
+
+    state_zip = address[2].split()
+    event.update(province: state_zip[0])
+    event.update(postal_code: state_zip[1])
+
+    event.update(country: address[3])
+
+    canadian = 'NC'
+
+    if address[3] == 'CAN'
+      canadian = 'C'
+    end
+
+    event.update(canadian_performance: canadian)
 
     event.update(performance_time: params[:event][:performance_time])
-
-    #puts composer.errors.full_messages
-    puts event.errors.full_messages
-
-    #LOCATION SHIT
+    date_of_program
+    event.update(performance_time: event.updated_at.strftime("%l:%M:%S %p"))
+    puts event.updated_at.strftime("%l:%M:%S %p")
     redirect_to root_path
   end
 
@@ -46,6 +74,7 @@ class EventsController < ApplicationController
     event.update(promoter_postal_code: params[:event][:promoter_postal_code])
     event.update(promoter_country: params[:event][:promoter_country])
     event.update(promoter_telephone: params[:event][:promoter_telephone])
+    event.save
 
     redirect_to root_path
   end
@@ -55,7 +84,16 @@ class EventsController < ApplicationController
     event = Event.find(params[:id])
     event.update(file: params[:event][:file])
     event.update(fileName: params[:event][:fileName])
+    event.save
     redirect_to root_path
   end
 
+  def song
+    event = Event.find(params[:id])
+    song = event.songs.new
+    song.update(title: params[:title])
+    song.update(artist: params[:artist])
+    song.save
+    redirect_to root_path
+  end
 end
