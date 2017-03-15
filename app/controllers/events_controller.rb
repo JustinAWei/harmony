@@ -91,8 +91,8 @@ class EventsController < ApplicationController
   def song
     event = Event.find(params[:id])
     song = event.songs.new
-    song.update(title: params[:title])
-    song.update(artist: params[:artist])
+    song.update(title: params[:event][:title])
+    song.update(artist: params[:event][:artist])
     song.save
     redirect_to root_path
   end
