@@ -11,16 +11,22 @@ class EventsController < ApplicationController
     event.composers.each do |c|
       if num_composers == 0
         num_composers += 1
+        next
       end
       s = s + "\n\"OTHER_ARTIST_NAME_#{num_composers}\":\"#{c.name}\","
       num_composers += 1
     end
 
-    c = ""
+    num_songs = 0
+    c = "{ \"ORIGINAL_TITLE\":\"#{event.songs.first.title}\",\"COMPOSER\":\"#{event.songs.first.artist}\" }"
     event.songs.each do |s|
-      c = c + "{ \"ORIGINAL_TITLE\":\"#{s.title}\",\"COMPOSER\":\"#{s.artist}\" },\n"
+      if num_songs == 1
+        num_composers += 1
+        next
+      end
+      c = c + ",\n{ \"ORIGINAL_TITLE\":\"#{s.title}\",\"COMPOSER\":\"#{s.artist}\" }"
     end
-
+    c = c + "\n"
     js =
     """
 {
@@ -51,9 +57,9 @@ class EventsController < ApplicationController
 \"compositions\":[
 #{c}]
 }
-
-    """
-    render text: js
+"""
+    puts(js)
+    render json: JSON.parse(js)
   end
 
   def endpoint
