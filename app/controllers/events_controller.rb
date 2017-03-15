@@ -2,6 +2,60 @@ class EventsController < ApplicationController
   def test
   end
 
+
+  def json
+    event = Event.find(params[:id])
+
+    s = "\"ARTIST_NAME\":\"#{event.composers.first.name}\","
+    num_composers = 0
+    event.composers.each do |c|
+      if num_composers == 0
+        num_composers += 1
+      end
+      s = s + "\n\"OTHER_ARTIST_NAME_#{num_composers}\":\"#{c.name}\","
+      num_composers += 1
+    end
+
+    c = ""
+    event.songs.each do |s|
+      c = c + "{ \"ORIGINAL_TITLE\":\"#{s.title}\",\"COMPOSER\":\"#{s.artist}\" },\n"
+    end
+
+    js =
+    """
+{
+\"MARIE_NO\":\"#{event.marie_no}\",
+\"CANADIAN_PERFORMANCE\":\"#{event.canadian_performance}\",
+\"TYPE_OF_PROGRAM\":\"#{event.type_of_program}\",
+#{s}
+\"PROOF_TYPE\":\"#{event.proof_type}\",
+\"DATE_OF_PROGRAM\":\"#{event.date_of_program}\",
+\"VENUE\":\"#{event.venue}\",
+\"VENUETYPE\":\"#{event.venuetype}\",
+\"VENUECAPACITY\":\"#{event.venuecapacity}\",
+\"STREET1\":\"#{event.street1}\",
+\"CITY\":\"#{event.city}\",
+\"PROVINCE\":\"#{event.province}\",
+\"POSTAL_CODE\":\"#{event.postal_code}\",
+\"COUNTRY\":\"#{event.country}\",
+\"VENUE_PHONE\":\"#{event.venue_phone}\",
+\"VENUE_WEBSITE\":\"#{event.venue_website}\",
+\"PERFORMANCE_TIME\":\"#{event.performance_time}\",
+\"PROMOTER\":\"#{event.promoter}\",
+\"PROMOTER_STREET1\":\"#{event.promoter_street1}\",
+\"PROMOTER_CITY\":\"#{event.promoter_city}\",
+\"PROMOTER_PROVINCE\":\"#{event.promoter_province}\",
+\"PROMOTER_POSTAL_CODE\":\"#{event.promoter_postal_code}\",
+\"PROMOTER_COUNTRY\":\"#{event.promoter_country}\",
+\"PROMOTER_TELEPHONE\":\"#{event.promoter_telephone}\",
+\"compositions\":[
+#{c}]
+}
+
+    """
+    render text: js
+  end
+
   def endpoint
     @arr = []
 
@@ -14,6 +68,10 @@ class EventsController < ApplicationController
   end
 
   def dashboard
+    @events = Event.all
+  end
+
+  def map
   end
 
   def create
@@ -57,7 +115,7 @@ class EventsController < ApplicationController
 
     event.update(street1: address[0])
     #puts address[0]
-    event.update(city: address[1])
+    event.update(city: address[1][1..-1])
     #puts address[1]
 
     state_zip = address[2].split()
@@ -66,7 +124,7 @@ class EventsController < ApplicationController
     #puts state_zip[1]
     event.update(postal_code: state_zip[1])
 
-    event.update(country: address[3])
+    event.update(country: address[3][1..-1])
     #puts address[3]
 
     canadian = 'NC'
@@ -80,7 +138,8 @@ class EventsController < ApplicationController
     event.update(date_of_program: event.updated_at.strftime("%D"))
 
     #puts event.updated_at.strftime("%D")
-    event.update(performance_time: event.updated_at.strftime("%l:%M:%S %p"))
+    event.update(performance_time: event.updated_at.strftime("%R:%M:%S %p"))
+
     #puts event.updated_at.strftime("%l:%M:%S %p")
     redirect_to root_path
   end
