@@ -29,6 +29,7 @@ ActiveRecord::Schema.define(version: 20170314201957) do
     t.integer  "file_file_size"
     t.datetime "file_updated_at"
     t.string   "fileName"
+    t.string   "location"
     t.string   "canadian_performance"
     t.string   "date_of_program"
     t.string   "street1"

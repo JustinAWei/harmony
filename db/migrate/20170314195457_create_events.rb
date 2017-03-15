@@ -6,6 +6,7 @@ class CreateEvents < ActiveRecord::Migration[5.0]
       t.string :fileName
 
       #date, location
+      t.string :location
       t.string :canadian_performance
       t.string :date_of_program
       t.string :street1

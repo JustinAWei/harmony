@@ -1,14 +1,35 @@
-!!!
-%html
-  %head
-    %meta{:content => "text/html; charset=UTF-8", "http-equiv" => "Content-Type"}/
-    %title Harmony
-    = csrf_meta_tags
-    = stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload'
-    = javascript_include_tag 'application', 'data-turbolinks-track': 'reload'
-    %link{:href => "https://cdnjs.cloudflare.com/ajax/libs/leaflet/0.7.7/leaflet.css", :rel => "stylesheet"}/
-    %script{:src => "https://cdnjs.cloudflare.com/ajax/libs/leaflet/0.7.7/leaflet.js"}
-    %script{:src => "https://www.mapquestapi.com/sdk/leaflet/v2.2/mq-map.js?key=KEY"}
-    %script{:src => "https://www.mapquestapi.com/sdk/leaflet/v2.2/mq-geocoding.js?key=KEY"}
-  %body
-    = yield
+%body
+  #map
+  :javascript
+
+    var data, google_data = [];
+
+    $.getJSON('/endpoint', function(data) {
+      data.forEach(function(entry) {
+        var s = entry.split(",");
+        var lat = s[0];
+        var long =  s[1];
+        google_data.push(new google.maps.LatLng(lat, long));
+      })
+    });
+
+    var map, heatmap;
+    function initMap() {
+      map = new google.maps.Map(document.getElementById('map'), {
+        zoom: 5,
+        center: {lat: 37.0902, lng: -95.7129},
+        mapTypeId: 'satellite'
+      });
+
+      heatmap = new google.maps.visualization.HeatmapLayer({
+        data: google_data,
+        map: map
+      });
+    }
+
+    // Heatmap data: 500 Points
+    function getPoints() {
+      return [
+        new google.maps.LatLng(37.758910, -122.406228),
+      ];
+    }

@@ -2,6 +2,20 @@ class EventsController < ApplicationController
   def test
   end
 
+  def endpoint
+    @arr = []
+
+    Event.all.each do |e|
+      puts 'location:'
+      puts e.location
+      @arr.push(e.location)
+    end
+    render json: @arr
+  end
+
+  def dashboard
+  end
+
   def create
     event = Event.new
     event.update(marie_no: params[:event][:marie_no])
@@ -38,16 +52,22 @@ class EventsController < ApplicationController
 
   def geomap
     event = Event.find(params[:id])
-    address = Geokit::Geocoders::GoogleGeocoder.reverse_geocode(params[:event][:location]).full_address.split(',')
+    event.update(location: params[:event][:location])
+    address = Geokit::Geocoders::GoogleGeocoder.reverse_geocode(event.location).full_address.split(',')
 
     event.update(street1: address[0])
+    #puts address[0]
     event.update(city: address[1])
+    #puts address[1]
 
     state_zip = address[2].split()
+    #puts state_zip[0]
     event.update(province: state_zip[0])
+    #puts state_zip[1]
     event.update(postal_code: state_zip[1])
 
     event.update(country: address[3])
+    #puts address[3]
 
     canadian = 'NC'
 
@@ -57,10 +77,11 @@ class EventsController < ApplicationController
 
     event.update(canadian_performance: canadian)
 
-    event.update(performance_time: params[:event][:performance_time])
-    date_of_program
+    event.update(date_of_program: event.updated_at.strftime("%D"))
+
+    #puts event.updated_at.strftime("%D")
     event.update(performance_time: event.updated_at.strftime("%l:%M:%S %p"))
-    puts event.updated_at.strftime("%l:%M:%S %p")
+    #puts event.updated_at.strftime("%l:%M:%S %p")
     redirect_to root_path
   end
 

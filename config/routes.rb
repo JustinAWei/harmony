@@ -6,6 +6,8 @@ Rails.application.routes.draw do
 
   get '/dashboard' => 'events#dashboard'
 
+  get '/endpoint' => 'events#endpoint'
+  
   post '/events' => 'events#create'
 
   #venue info
