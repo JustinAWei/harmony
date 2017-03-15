@@ -2,7 +2,6 @@ class EventsController < ApplicationController
   def test
   end
 
-
   def json
     event = Event.find(params[:id])
 
@@ -58,6 +57,7 @@ class EventsController < ApplicationController
 #{c}]
 }
 """
+
     puts(js)
     render json: JSON.parse(js)
   end

@@ -7,8 +7,6 @@ Rails.application.routes.draw do
   get 'events/:id/json' => 'events#json'
   get '/dashboard' => 'events#dashboard'
 
-  get '/map' => 'events#map'
-
   get '/endpoint' => 'events#endpoint'
 
   post '/events' => 'events#create'

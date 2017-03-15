@@ -1,5 +1,59 @@
+%body
+  #map
+  :javascript
+
+    var data, google_data = [];
+
+    $.getJSON('/endpoint', function(data) {
+      data.forEach(function(entry) {
+        var s = entry.split(",");
+        var lat = s[0];
+        var long =  s[1];
+        google_data.push(new google.maps.LatLng(lat, long));
+      })
+    });
+
+    var map, heatmap;
+    function initMap() {
+      map = new google.maps.Map(document.getElementById('map'), {
+        zoom: 5,
+        center: {lat: 37.0902, lng: -95.7129},
+        mapTypeId: 'roadmap'
+      });
+
+      heatmap = new google.maps.visualization.HeatmapLayer({
+        data: google_data,
+        map: map
+      });
+    }
+
+    // Heatmap data: 500 Points
+    function getPoints() {
+      return [
+        new google.maps.LatLng(37.758910, -122.406228),
+      ];
+    }
 
 .container
-  .card-panel.red.lighten-2 This is a card panel with a teal lighten-2 class
-  - @events.each do |e|
-    .card-panel
+  .row
+    - @events.each do |e|
+      .col.s4
+        %ul.collapsible{"data-collapsible" => "accordion"}
+          %li
+            .collapsible-header
+              = e.venue + ' | '
+              = Geokit::Geocoders::GoogleGeocoder.reverse_geocode(e.location).full_address
+            .collapsible-body
+              %span
+                .collection
+                = ' | '
+                - e.composers.each do |c|
+                  = c.name + ' | '
+                  = c.name + ' | '
+                  = c.name + ' | '
+                  = c.name + ' | '
+                .divider
+                - e.songs.each do |s|
+                  .collection-item
+                    %i.material-icons queue_music
+                    = s.title + " -" + s.artist
