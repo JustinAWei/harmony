@@ -37,6 +37,31 @@
 .container
   .row
     - @events.each do |e|
+      .col.s12
+        %ul.collapsible{"data-collapsible" => "accordion"}
+          %li
+            .collapsible-header
+              = e.venue + ' | '
+              = Geokit::Geocoders::GoogleGeocoder.reverse_geocode(e.location).full_address
+            .collapsible-body
+              %span
+                .collection
+                = ' | '
+                - e.composers.each do |c|
+                  = c.name + ' | '
+                  = c.name + ' | '
+                  = c.name + ' | '
+                  = c.name + ' | '
+                .divider
+                - e.songs.each do |s|
+                  .collection-item
+                    %i.material-icons queue_music
+                    = s.title + " -" + s.artist
+
+
+.container
+  .row
+    - @events.each do |e|
       .col.s4
         %ul.collapsible{"data-collapsible" => "accordion"}
           %li
