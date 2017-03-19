@@ -74,7 +74,7 @@ class EventsController < ApplicationController
   end
 
   def dashboard
-    @events = Event.all
+    @events = Event.where.not(venue:nil, location:nil)
   end
 
   def map

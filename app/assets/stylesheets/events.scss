@@ -13,23 +13,17 @@ html, body {
   padding: 0;
 }
 
+.events.container {
+  margin: 50px auto;
+}
+
 .collapsible-header {
-  font-size: 2em;
-  color: #1fda9a;
-  //font-family: 'Oswald';
+  //font-family: ;
 }
 
 .collapsible-body {
-  padding: 20px !important;
   background-color: white;
   & > span {
-    color: #1fda9a;
-    font-size: 2em;
-    //font-family: 'Oswald';
-    & > .collection-item {
-      padding: 10px;
-      color: #1fda9a;
-    }
+    //font-family: ;
   }
-
 }

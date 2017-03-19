@@ -2,10 +2,10 @@ Rails.application.routes.draw do
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 
   #make event
-  root to: 'events#test'
+  root to: 'events#dashboard'
 
   get 'events/:id/json' => 'events#json'
-  get '/dashboard' => 'events#dashboard'
+  get '/test' => 'events#test'
 
   get '/endpoint' => 'events#endpoint'
 
