@@ -6,7 +6,7 @@ Harmony is an effortless tool to track musical events and set lists. Using harmo
 </p>
 
 # Inspiration
-The problem is that keeping track of performances is complicated and expensive. This is especially true for companies such as SOCAN which only recently became digitized. We set out to change this by building harmony - a simple tool for tracking events. Just download our app, take a picture, and you’re done. We’ll automatically handle the rest.
+The problem is that keeping track of performances is complicated and expensive. This is especially true for companies such as SOCAN which only recently became digitized. We set out to change this by building harmony - a simple tool for tracking events. Just download our app, take a picture, and you're done. We'll automatically handle the rest.
 
 # The Solution
 We built a full featured mobile application that automatically syncs with the SOCAN api and an online dashboard, alerting SOCAN representatives of live events in minutes. Users only have to fill out a form and take a picture to submit an event.
@@ -18,56 +18,68 @@ The music royalty and production market is over $5 billion dollars - by reaching
 
 ## Account ID
 POST to: '/events' (returns json: {id: n} )
+```python
 params {
-  marie_id: ‘777777777’
-}
+  marie_id: '777777777'
+}```
 
 ## Venue Information
 POST to:  '/events/:id/venue' 
+```python
 params {
-  type_of_program: ‘sc’
-  proof_type: ‘contract’
-  venue: ‘SOCAN’
-  venuetype: ‘cfs’
-  venuecapacity: ‘l5’
-  venue_phone: 4164458700’
-  venue_website: ‘www.socan.ca’
-}
+  type_of_program: 'sc'
+  proof_type: 'contract'
+  venue: 'SOCAN'
+  venuetype: 'cfs'
+  venuecapacity: 'l5'
+  venue_phone: 4164458700'
+  venue_website: 'www.socan.ca'
+}```
 
 ## Promoter Information
 POST to: '/events/:id/promoter' 
+```python
 params {
-  promoter: ‘SOCAN’
-  promoter_street1: ‘41 Valleybrook’
-  promoter_city: ‘Toronto’
-  promoter_province: ‘ON’
-  promoter_postal_code: ‘M3B2S6’
-  promoter_country: ‘CAN’
-  promoter_telephone: ‘4164458700’
+  promoter: 'SOCAN'
+  promoter_street1: '41 Valleybrook'
+  promoter_city: 'Toronto'
+  promoter_province: 'ON'
+  promoter_postal_code: 'M3B2S6'
+  promoter_country: 'CAN'
+  promoter_telephone: '4164458700'
 }
+```
 
 ## PERFORMING Composer
 POST to: '/events/:id/composers' 
+```python
 params {
-  name: ‘Lorde’
+  name: 'Lorde'
 }
+```
 
 ## Song
 POST to: '/events/:id/songs' 
+```python
 params {
-  title: ‘Tennis Court’
-  artist: ‘Lorde’
+  title: 'Tennis Court'
+  artist: 'Lorde'
 }
+```
 
 ## Location
 POST to: '/events/:id/location' 
+```python
 params {
-  location: ‘37.791821,-122.394679’
+  location: '37.791821,-122.394679'
 }
+```
 
 ## Setlist Picture + File Name
 POST to: '/events/:id/setlist'
+```python
 params {
 	file: [a picture?]
-	fileName: ‘shelby.png’
+	fileName: 'shelby.png'
 }
+```
