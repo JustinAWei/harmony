@@ -18,7 +18,7 @@ The music royalty and production market is over $5 billion dollars - by reaching
 
 ## Account ID
 POST to: '/events' (returns json: {id: n} )
-```python
+```javascript
 params {
   marie_id: '777777777'
 }
@@ -26,35 +26,35 @@ params {
 
 ## Venue Information
 POST to:  '/events/:id/venue' 
-```python
+```javascript
 params {
-  type_of_program: 'sc'
-  proof_type: 'contract'
-  venue: 'SOCAN'
-  venuetype: 'cfs'
-  venuecapacity: 'l5'
-  venue_phone: '4164458700'
+  type_of_program: 'sc',
+  proof_type: 'contract',
+  venue: 'SOCAN',
+  venuetype: 'cfs',
+  venuecapacity: 'l5',
+  venue_phone: '4164458700',
   venue_website: 'www.socan.ca'
 }
 ```
 
 ## Promoter Information
 POST to: '/events/:id/promoter' 
-```python
+```javascript
 params {
-  promoter: 'SOCAN'
-  promoter_street1: '41 Valleybrook'
-  promoter_city: 'Toronto'
-  promoter_province: 'ON'
-  promoter_postal_code: 'M3B2S6'
-  promoter_country: 'CAN'
+  promoter: 'SOCAN',
+  promoter_street1: '41 Valleybrook',
+  promoter_city: 'Toronto',
+  promoter_province: 'ON',
+  promoter_postal_code: 'M3B2S6',
+  promoter_country: 'CAN',
   promoter_telephone: '4164458700'
 }
 ```
 
 ## PERFORMING Composer
 POST to: '/events/:id/composers' 
-```python
+```javascript
 params {
   name: 'Lorde'
 }
@@ -62,16 +62,16 @@ params {
 
 ## Song
 POST to: '/events/:id/songs' 
-```python
+```javascript
 params {
-  title: 'Tennis Court'
+  title: 'Tennis Court',
   artist: 'Lorde'
 }
 ```
 
 ## Location
 POST to: '/events/:id/location' 
-```python
+```javascript
 params {
   location: '37.791821,-122.394679'
 }
@@ -79,9 +79,9 @@ params {
 
 ## Setlist Picture + File Name
 POST to: '/events/:id/setlist'
-```python
+```javascript
 params {
-	file: [a picture]
+	file: [a picture],
 	fileName: 'shelby.png'
 }
 ```
