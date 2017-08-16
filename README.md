@@ -21,7 +21,8 @@ POST to: '/events' (returns json: {id: n} )
 ```python
 params {
   marie_id: '777777777'
-}```
+}
+```
 
 ## Venue Information
 POST to:  '/events/:id/venue' 
@@ -32,9 +33,10 @@ params {
   venue: 'SOCAN'
   venuetype: 'cfs'
   venuecapacity: 'l5'
-  venue_phone: 4164458700'
+  venue_phone: '4164458700'
   venue_website: 'www.socan.ca'
-}```
+}
+```
 
 ## Promoter Information
 POST to: '/events/:id/promoter' 
@@ -79,7 +81,7 @@ params {
 POST to: '/events/:id/setlist'
 ```python
 params {
-	file: [a picture?]
+	file: [a picture]
 	fileName: 'shelby.png'
 }
 ```
